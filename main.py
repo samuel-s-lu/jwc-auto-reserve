@@ -46,17 +46,22 @@ if __name__ == "__main__":
     driver.find_element(By.NAME, "_eventId_proceed").click()
     driver.switch_to.window(driver.current_window_handle)
 
+    time.sleep(2)
+
+    #accepts cookies
+    driver.find_element(By.ID, "gdpr-cookie-accept").click()
+
     # searches for activity
     search = driver.find_element(By.ID, 'txtSearch')
     search.send_keys(credentials["activity"])
     search.send_keys(Keys.ENTER)
 
-    time.sleep(1)
+    time.sleep(2)
 
     # clicks on activity
     driver.find_element(By.ID, 'list-group').click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     # gathers all events and parses their dates
     events = driver.find_elements(By.XPATH,"//div[@id='main']//section[@class='list-group']//div[@class]//div[@data-instance-id]")
@@ -67,7 +72,6 @@ if __name__ == "__main__":
             time_range = event.get_attribute("data-instance-times")
             if ([day, time_range] in userInfo.desired_events):
                 path = "//div[@id='main']//section[@class='list-group']//div[@class]//div[@data-instance-dates='{date}' and @data-instance-times='{time_range}']//button".format(**locals())
-                print(path)
                 driver.find_element(By.XPATH, path).click()
                 break
     else:
@@ -79,16 +83,16 @@ if __name__ == "__main__":
                 driver.find_element(By.XPATH, path).click()
                 break
     
-    time.sleep(1)
+    time.sleep(2)
 
     # finds button to find waiver and accepts
     driver.find_element(By.ID, "btnAccept").click()
 
-    time.sleep(1)
+    time.sleep(2)
 
     driver.find_element(By.ID, "checkoutButton").click() 
 
-    time.sleep(1)
+    time.sleep(2)
 
     driver.find_element(By.XPATH, "//div[@id='CheckoutModal']//button[@onclick='Submit()']").click()
 
