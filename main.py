@@ -21,7 +21,9 @@ except ModuleNotFoundError:
 if __name__ == "__main__":
     # initiates chrome driver and goes to ucla rec website
     URL = "https://secure.recreation.ucla.edu/Program/GetProducts"
-    driver = webdriver.Chrome()
+    op = webdriver.ChromeOptions()
+    op.add_argument('--headless')
+    driver = webdriver.Chrome(options=op)
     driver.implicitly_wait(20)
     driver.get(URL)
 
