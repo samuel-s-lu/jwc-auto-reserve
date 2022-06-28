@@ -1,6 +1,9 @@
+from gettext import install
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 # gets credentials from userInfo.py if it exists, else get credentials from user input
@@ -23,7 +26,7 @@ if __name__ == "__main__":
     URL = "https://secure.recreation.ucla.edu/Program/GetProducts"
     op = webdriver.ChromeOptions()
     op.add_argument('--headless')
-    driver = webdriver.Chrome(options=op)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=op)
     driver.implicitly_wait(20)
     driver.get(URL)
 
